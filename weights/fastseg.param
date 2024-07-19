@@ -1,0 +1,190 @@
+7767517
+188 209
+Input            images                   0 1 images
+Convolution      /early/early.0/Conv      1 1 images /early/early.0/Conv_output_0 0=16 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=432
+HardSwish        /early/early.2/Mul       1 1 /early/early.0/Conv_output_0 /early/early.2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_0              1 2 /early/early.2/Mul_output_0 /early/early.2/Mul_output_0_splitncnn_0 /early/early.2/Mul_output_0_splitncnn_1
+ConvolutionDepthWise /block0/block0.0/conv/conv.0/conv/Conv 1 1 /early/early.2/Mul_output_0_splitncnn_1 /block0/block0.0/conv/conv.0/conv/Conv_output_0 0=16 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=144 7=16
+ReLU             /block0/block0.0/conv/conv.0/relu/Relu 1 1 /block0/block0.0/conv/conv.0/conv/Conv_output_0 /block0/block0.0/conv/conv.0/relu/Relu_output_0
+Convolution      /block0/block0.0/conv/conv.1/conv/Conv 1 1 /block0/block0.0/conv/conv.0/relu/Relu_output_0 /block0/block0.0/conv/conv.1/conv/Conv_output_0 0=16 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=256
+ReLU             /block0/block0.0/conv/conv.1/relu/Relu 1 1 /block0/block0.0/conv/conv.1/conv/Conv_output_0 /block0/block0.0/conv/conv.1/relu/Relu_output_0
+Split            splitncnn_1              1 3 /block0/block0.0/conv/conv.1/relu/Relu_output_0 /block0/block0.0/conv/conv.1/relu/Relu_output_0_splitncnn_0 /block0/block0.0/conv/conv.1/relu/Relu_output_0_splitncnn_1 /block0/block0.0/conv/conv.1/relu/Relu_output_0_splitncnn_2
+Convolution      /block1/block1.0/conv1/Conv 1 1 /block0/block0.0/conv/conv.1/relu/Relu_output_0_splitncnn_2 /block1/block1.0/conv1/Conv_output_0 0=72 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1152
+ReLU             /block1/block1.0/act1/Relu 1 1 /block1/block1.0/conv1/Conv_output_0 /block1/block1.0/act1/Relu_output_0
+ConvolutionDepthWise /block1/block1.0/conv2/Conv 1 1 /block1/block1.0/act1/Relu_output_0 /block1/block1.0/conv2/Conv_output_0 0=72 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=648 7=72
+ReLU             /block1/block1.0/act2/Relu 1 1 /block1/block1.0/conv2/Conv_output_0 /block1/block1.0/act2/Relu_output_0
+Convolution      /block1/block1.0/conv3/Conv 1 1 /block1/block1.0/act2/Relu_output_0 /block1/block1.0/conv3/Conv_output_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1728
+ConvolutionDepthWise /block1/block1.0/skip/skip.0/Conv 1 1 /block0/block0.0/conv/conv.1/relu/Relu_output_0_splitncnn_1 /block1/block1.0/skip/skip.0/Conv_output_0 0=16 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=144 7=16
+Convolution      /block1/block1.0/skip/skip.2/Conv 1 1 /block1/block1.0/skip/skip.0/Conv_output_0 /block1/block1.0/skip/skip.2/Conv_output_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=384
+BinaryOp         /block1/block1.0/Add     2 1 /block1/block1.0/conv3/Conv_output_0 /block1/block1.0/skip/skip.2/Conv_output_0 /block1/block1.0/Add_output_0 0=0
+ReLU             /block1/block1.0/act3/Relu 1 1 /block1/block1.0/Add_output_0 /block1/block1.0/act3/Relu_output_0
+Split            splitncnn_2              1 2 /block1/block1.0/act3/Relu_output_0 /block1/block1.0/act3/Relu_output_0_splitncnn_0 /block1/block1.0/act3/Relu_output_0_splitncnn_1
+Convolution      /block1/block1.1/conv1/Conv 1 1 /block1/block1.0/act3/Relu_output_0_splitncnn_1 /block1/block1.1/conv1/Conv_output_0 0=88 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2112
+ReLU             /block1/block1.1/act1/Relu 1 1 /block1/block1.1/conv1/Conv_output_0 /block1/block1.1/act1/Relu_output_0
+ConvolutionDepthWise /block1/block1.1/conv2/Conv 1 1 /block1/block1.1/act1/Relu_output_0 /block1/block1.1/conv2/Conv_output_0 0=88 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=792 7=88
+ReLU             /block1/block1.1/act2/Relu 1 1 /block1/block1.1/conv2/Conv_output_0 /block1/block1.1/act2/Relu_output_0
+Convolution      /block1/block1.1/conv3/Conv 1 1 /block1/block1.1/act2/Relu_output_0 /block1/block1.1/conv3/Conv_output_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2112
+BinaryOp         /block1/block1.1/Add     2 1 /block1/block1.1/conv3/Conv_output_0 /block1/block1.0/act3/Relu_output_0_splitncnn_0 /block1/block1.1/Add_output_0 0=0
+ReLU             /block1/block1.1/act3/Relu 1 1 /block1/block1.1/Add_output_0 /block1/block1.1/act3/Relu_output_0
+Split            splitncnn_3              1 2 /block1/block1.1/act3/Relu_output_0 /block1/block1.1/act3/Relu_output_0_splitncnn_0 /block1/block1.1/act3/Relu_output_0_splitncnn_1
+Convolution      /block2/block2.0/conv1/Conv 1 1 /block1/block1.1/act3/Relu_output_0_splitncnn_1 /block2/block2.0/conv1/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2304
+HardSwish        /block2/block2.0/act1/Mul 1 1 /block2/block2.0/conv1/Conv_output_0 /block2/block2.0/act1/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise /block2/block2.0/conv2/Conv 1 1 /block2/block2.0/act1/Mul_output_0 /block2/block2.0/conv2/Conv_output_0 0=96 1=5 11=5 2=2 12=2 3=1 13=1 4=4 14=4 15=4 16=4 5=1 6=2400 7=96
+HardSwish        /block2/block2.0/act2/Mul 1 1 /block2/block2.0/conv2/Conv_output_0 /block2/block2.0/act2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_4              1 2 /block2/block2.0/act2/Mul_output_0 /block2/block2.0/act2/Mul_output_0_splitncnn_0 /block2/block2.0/act2/Mul_output_0_splitncnn_1
+Reduction        /block2/block2.0/se/ReduceMean 1 1 /block2/block2.0/act2/Mul_output_0_splitncnn_1 /block2/block2.0/se/ReduceMean_output_0 0=3 1=0 -23303=2,1,2 4=1 5=1
+Reshape          /block2/block2.0/se/Reshape 1 1 /block2/block2.0/se/ReduceMean_output_0 /block2/block2.0/se/Reshape_output_0 0=96
+InnerProduct     /block2/block2.0/se/fc/fc.0/MatMul 1 1 /block2/block2.0/se/Reshape_output_0 /block2/block2.0/se/fc/fc.0/MatMul_output_0 0=24 1=0 2=2304
+ReLU             /block2/block2.0/se/fc/fc.1/Relu 1 1 /block2/block2.0/se/fc/fc.0/MatMul_output_0 /block2/block2.0/se/fc/fc.1/Relu_output_0
+InnerProduct     /block2/block2.0/se/fc/fc.2/MatMul 1 1 /block2/block2.0/se/fc/fc.1/Relu_output_0 /block2/block2.0/se/fc/fc.2/MatMul_output_0 0=96 1=0 2=2304
+HardSigmoid      /block2/block2.0/se/fc/fc.3/HardSigmoid 1 1 /block2/block2.0/se/fc/fc.2/MatMul_output_0 /block2/block2.0/se/fc/fc.3/HardSigmoid_output_0 0=1.666667e-01 1=5.000000e-01
+Reshape          /block2/block2.0/se/Reshape_1 1 1 /block2/block2.0/se/fc/fc.3/HardSigmoid_output_0 /block2/block2.0/se/Reshape_1_output_0 0=1 1=1 2=96
+BinaryOp         /block2/block2.0/se/Mul  2 1 /block2/block2.0/act2/Mul_output_0_splitncnn_0 /block2/block2.0/se/Reshape_1_output_0 /block2/block2.0/se/Mul_output_0 0=2
+Convolution      /block2/block2.0/conv3/Conv 1 1 /block2/block2.0/se/Mul_output_0 /block2/block2.0/conv3/Conv_output_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3840
+Convolution      /block2/block2.0/skip/skip.0/Conv 1 1 /block1/block1.1/act3/Relu_output_0_splitncnn_0 /block2/block2.0/skip/skip.0/Conv_output_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=960
+BinaryOp         /block2/block2.0/Add     2 1 /block2/block2.0/conv3/Conv_output_0 /block2/block2.0/skip/skip.0/Conv_output_0 /block2/block2.0/Add_output_0 0=0
+HardSwish        /block2/block2.0/act3/Mul 1 1 /block2/block2.0/Add_output_0 /block2/block2.0/act3/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_5              1 2 /block2/block2.0/act3/Mul_output_0 /block2/block2.0/act3/Mul_output_0_splitncnn_0 /block2/block2.0/act3/Mul_output_0_splitncnn_1
+Convolution      /block2/block2.1/conv1/Conv 1 1 /block2/block2.0/act3/Mul_output_0_splitncnn_1 /block2/block2.1/conv1/Conv_output_0 0=240 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9600
+HardSwish        /block2/block2.1/act1/Mul 1 1 /block2/block2.1/conv1/Conv_output_0 /block2/block2.1/act1/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise /block2/block2.1/conv2/Conv 1 1 /block2/block2.1/act1/Mul_output_0 /block2/block2.1/conv2/Conv_output_0 0=240 1=5 11=5 2=2 12=2 3=1 13=1 4=4 14=4 15=4 16=4 5=1 6=6000 7=240
+HardSwish        /block2/block2.1/act2/Mul 1 1 /block2/block2.1/conv2/Conv_output_0 /block2/block2.1/act2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_6              1 2 /block2/block2.1/act2/Mul_output_0 /block2/block2.1/act2/Mul_output_0_splitncnn_0 /block2/block2.1/act2/Mul_output_0_splitncnn_1
+Reduction        /block2/block2.1/se/ReduceMean 1 1 /block2/block2.1/act2/Mul_output_0_splitncnn_1 /block2/block2.1/se/ReduceMean_output_0 0=3 1=0 -23303=2,1,2 4=1 5=1
+Reshape          /block2/block2.1/se/Reshape 1 1 /block2/block2.1/se/ReduceMean_output_0 /block2/block2.1/se/Reshape_output_0 0=240
+InnerProduct     /block2/block2.1/se/fc/fc.0/MatMul 1 1 /block2/block2.1/se/Reshape_output_0 /block2/block2.1/se/fc/fc.0/MatMul_output_0 0=60 1=0 2=14400
+ReLU             /block2/block2.1/se/fc/fc.1/Relu 1 1 /block2/block2.1/se/fc/fc.0/MatMul_output_0 /block2/block2.1/se/fc/fc.1/Relu_output_0
+InnerProduct     /block2/block2.1/se/fc/fc.2/MatMul 1 1 /block2/block2.1/se/fc/fc.1/Relu_output_0 /block2/block2.1/se/fc/fc.2/MatMul_output_0 0=240 1=0 2=14400
+HardSigmoid      /block2/block2.1/se/fc/fc.3/HardSigmoid 1 1 /block2/block2.1/se/fc/fc.2/MatMul_output_0 /block2/block2.1/se/fc/fc.3/HardSigmoid_output_0 0=1.666667e-01 1=5.000000e-01
+Reshape          /block2/block2.1/se/Reshape_1 1 1 /block2/block2.1/se/fc/fc.3/HardSigmoid_output_0 /block2/block2.1/se/Reshape_1_output_0 0=1 1=1 2=240
+BinaryOp         /block2/block2.1/se/Mul  2 1 /block2/block2.1/act2/Mul_output_0_splitncnn_0 /block2/block2.1/se/Reshape_1_output_0 /block2/block2.1/se/Mul_output_0 0=2
+Convolution      /block2/block2.1/conv3/Conv 1 1 /block2/block2.1/se/Mul_output_0 /block2/block2.1/conv3/Conv_output_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9600
+BinaryOp         /block2/block2.1/Add     2 1 /block2/block2.1/conv3/Conv_output_0 /block2/block2.0/act3/Mul_output_0_splitncnn_0 /block2/block2.1/Add_output_0 0=0
+HardSwish        /block2/block2.1/act3/Mul 1 1 /block2/block2.1/Add_output_0 /block2/block2.1/act3/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_7              1 2 /block2/block2.1/act3/Mul_output_0 /block2/block2.1/act3/Mul_output_0_splitncnn_0 /block2/block2.1/act3/Mul_output_0_splitncnn_1
+Convolution      /block2/block2.2/conv1/Conv 1 1 /block2/block2.1/act3/Mul_output_0_splitncnn_1 /block2/block2.2/conv1/Conv_output_0 0=240 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9600
+HardSwish        /block2/block2.2/act1/Mul 1 1 /block2/block2.2/conv1/Conv_output_0 /block2/block2.2/act1/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise /block2/block2.2/conv2/Conv 1 1 /block2/block2.2/act1/Mul_output_0 /block2/block2.2/conv2/Conv_output_0 0=240 1=5 11=5 2=2 12=2 3=1 13=1 4=4 14=4 15=4 16=4 5=1 6=6000 7=240
+HardSwish        /block2/block2.2/act2/Mul 1 1 /block2/block2.2/conv2/Conv_output_0 /block2/block2.2/act2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_8              1 2 /block2/block2.2/act2/Mul_output_0 /block2/block2.2/act2/Mul_output_0_splitncnn_0 /block2/block2.2/act2/Mul_output_0_splitncnn_1
+Reduction        /block2/block2.2/se/ReduceMean 1 1 /block2/block2.2/act2/Mul_output_0_splitncnn_1 /block2/block2.2/se/ReduceMean_output_0 0=3 1=0 -23303=2,1,2 4=1 5=1
+Reshape          /block2/block2.2/se/Reshape 1 1 /block2/block2.2/se/ReduceMean_output_0 /block2/block2.2/se/Reshape_output_0 0=240
+InnerProduct     /block2/block2.2/se/fc/fc.0/MatMul 1 1 /block2/block2.2/se/Reshape_output_0 /block2/block2.2/se/fc/fc.0/MatMul_output_0 0=60 1=0 2=14400
+ReLU             /block2/block2.2/se/fc/fc.1/Relu 1 1 /block2/block2.2/se/fc/fc.0/MatMul_output_0 /block2/block2.2/se/fc/fc.1/Relu_output_0
+InnerProduct     /block2/block2.2/se/fc/fc.2/MatMul 1 1 /block2/block2.2/se/fc/fc.1/Relu_output_0 /block2/block2.2/se/fc/fc.2/MatMul_output_0 0=240 1=0 2=14400
+HardSigmoid      /block2/block2.2/se/fc/fc.3/HardSigmoid 1 1 /block2/block2.2/se/fc/fc.2/MatMul_output_0 /block2/block2.2/se/fc/fc.3/HardSigmoid_output_0 0=1.666667e-01 1=5.000000e-01
+Reshape          /block2/block2.2/se/Reshape_1 1 1 /block2/block2.2/se/fc/fc.3/HardSigmoid_output_0 /block2/block2.2/se/Reshape_1_output_0 0=1 1=1 2=240
+BinaryOp         /block2/block2.2/se/Mul  2 1 /block2/block2.2/act2/Mul_output_0_splitncnn_0 /block2/block2.2/se/Reshape_1_output_0 /block2/block2.2/se/Mul_output_0 0=2
+Convolution      /block2/block2.2/conv3/Conv 1 1 /block2/block2.2/se/Mul_output_0 /block2/block2.2/conv3/Conv_output_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9600
+BinaryOp         /block2/block2.2/Add     2 1 /block2/block2.2/conv3/Conv_output_0 /block2/block2.1/act3/Mul_output_0_splitncnn_0 /block2/block2.2/Add_output_0 0=0
+HardSwish        /block2/block2.2/act3/Mul 1 1 /block2/block2.2/Add_output_0 /block2/block2.2/act3/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_9              1 2 /block2/block2.2/act3/Mul_output_0 /block2/block2.2/act3/Mul_output_0_splitncnn_0 /block2/block2.2/act3/Mul_output_0_splitncnn_1
+Convolution      /block3/block3.0/conv1/Conv 1 1 /block2/block2.2/act3/Mul_output_0_splitncnn_1 /block3/block3.0/conv1/Conv_output_0 0=120 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4800
+HardSwish        /block3/block3.0/act1/Mul 1 1 /block3/block3.0/conv1/Conv_output_0 /block3/block3.0/act1/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise /block3/block3.0/conv2/Conv 1 1 /block3/block3.0/act1/Mul_output_0 /block3/block3.0/conv2/Conv_output_0 0=120 1=5 11=5 2=2 12=2 3=1 13=1 4=4 14=4 15=4 16=4 5=1 6=3000 7=120
+HardSwish        /block3/block3.0/act2/Mul 1 1 /block3/block3.0/conv2/Conv_output_0 /block3/block3.0/act2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_10             1 2 /block3/block3.0/act2/Mul_output_0 /block3/block3.0/act2/Mul_output_0_splitncnn_0 /block3/block3.0/act2/Mul_output_0_splitncnn_1
+Reduction        /block3/block3.0/se/ReduceMean 1 1 /block3/block3.0/act2/Mul_output_0_splitncnn_1 /block3/block3.0/se/ReduceMean_output_0 0=3 1=0 -23303=2,1,2 4=1 5=1
+Reshape          /block3/block3.0/se/Reshape 1 1 /block3/block3.0/se/ReduceMean_output_0 /block3/block3.0/se/Reshape_output_0 0=120
+InnerProduct     /block3/block3.0/se/fc/fc.0/MatMul 1 1 /block3/block3.0/se/Reshape_output_0 /block3/block3.0/se/fc/fc.0/MatMul_output_0 0=30 1=0 2=3600
+ReLU             /block3/block3.0/se/fc/fc.1/Relu 1 1 /block3/block3.0/se/fc/fc.0/MatMul_output_0 /block3/block3.0/se/fc/fc.1/Relu_output_0
+InnerProduct     /block3/block3.0/se/fc/fc.2/MatMul 1 1 /block3/block3.0/se/fc/fc.1/Relu_output_0 /block3/block3.0/se/fc/fc.2/MatMul_output_0 0=120 1=0 2=3600
+HardSigmoid      /block3/block3.0/se/fc/fc.3/HardSigmoid 1 1 /block3/block3.0/se/fc/fc.2/MatMul_output_0 /block3/block3.0/se/fc/fc.3/HardSigmoid_output_0 0=1.666667e-01 1=5.000000e-01
+Reshape          /block3/block3.0/se/Reshape_1 1 1 /block3/block3.0/se/fc/fc.3/HardSigmoid_output_0 /block3/block3.0/se/Reshape_1_output_0 0=1 1=1 2=120
+BinaryOp         /block3/block3.0/se/Mul  2 1 /block3/block3.0/act2/Mul_output_0_splitncnn_0 /block3/block3.0/se/Reshape_1_output_0 /block3/block3.0/se/Mul_output_0 0=2
+Convolution      /block3/block3.0/conv3/Conv 1 1 /block3/block3.0/se/Mul_output_0 /block3/block3.0/conv3/Conv_output_0 0=48 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=5760
+Convolution      /block3/block3.0/skip/skip.0/Conv 1 1 /block2/block2.2/act3/Mul_output_0_splitncnn_0 /block3/block3.0/skip/skip.0/Conv_output_0 0=48 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1920
+BinaryOp         /block3/block3.0/Add     2 1 /block3/block3.0/conv3/Conv_output_0 /block3/block3.0/skip/skip.0/Conv_output_0 /block3/block3.0/Add_output_0 0=0
+HardSwish        /block3/block3.0/act3/Mul 1 1 /block3/block3.0/Add_output_0 /block3/block3.0/act3/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_11             1 2 /block3/block3.0/act3/Mul_output_0 /block3/block3.0/act3/Mul_output_0_splitncnn_0 /block3/block3.0/act3/Mul_output_0_splitncnn_1
+Convolution      /block3/block3.1/conv1/Conv 1 1 /block3/block3.0/act3/Mul_output_0_splitncnn_1 /block3/block3.1/conv1/Conv_output_0 0=144 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=6912
+HardSwish        /block3/block3.1/act1/Mul 1 1 /block3/block3.1/conv1/Conv_output_0 /block3/block3.1/act1/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise /block3/block3.1/conv2/Conv 1 1 /block3/block3.1/act1/Mul_output_0 /block3/block3.1/conv2/Conv_output_0 0=144 1=5 11=5 2=2 12=2 3=1 13=1 4=4 14=4 15=4 16=4 5=1 6=3600 7=144
+HardSwish        /block3/block3.1/act2/Mul 1 1 /block3/block3.1/conv2/Conv_output_0 /block3/block3.1/act2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_12             1 2 /block3/block3.1/act2/Mul_output_0 /block3/block3.1/act2/Mul_output_0_splitncnn_0 /block3/block3.1/act2/Mul_output_0_splitncnn_1
+Reduction        /block3/block3.1/se/ReduceMean 1 1 /block3/block3.1/act2/Mul_output_0_splitncnn_1 /block3/block3.1/se/ReduceMean_output_0 0=3 1=0 -23303=2,1,2 4=1 5=1
+Reshape          /block3/block3.1/se/Reshape 1 1 /block3/block3.1/se/ReduceMean_output_0 /block3/block3.1/se/Reshape_output_0 0=144
+InnerProduct     /block3/block3.1/se/fc/fc.0/MatMul 1 1 /block3/block3.1/se/Reshape_output_0 /block3/block3.1/se/fc/fc.0/MatMul_output_0 0=36 1=0 2=5184
+ReLU             /block3/block3.1/se/fc/fc.1/Relu 1 1 /block3/block3.1/se/fc/fc.0/MatMul_output_0 /block3/block3.1/se/fc/fc.1/Relu_output_0
+InnerProduct     /block3/block3.1/se/fc/fc.2/MatMul 1 1 /block3/block3.1/se/fc/fc.1/Relu_output_0 /block3/block3.1/se/fc/fc.2/MatMul_output_0 0=144 1=0 2=5184
+HardSigmoid      /block3/block3.1/se/fc/fc.3/HardSigmoid 1 1 /block3/block3.1/se/fc/fc.2/MatMul_output_0 /block3/block3.1/se/fc/fc.3/HardSigmoid_output_0 0=1.666667e-01 1=5.000000e-01
+Reshape          /block3/block3.1/se/Reshape_1 1 1 /block3/block3.1/se/fc/fc.3/HardSigmoid_output_0 /block3/block3.1/se/Reshape_1_output_0 0=1 1=1 2=144
+BinaryOp         /block3/block3.1/se/Mul  2 1 /block3/block3.1/act2/Mul_output_0_splitncnn_0 /block3/block3.1/se/Reshape_1_output_0 /block3/block3.1/se/Mul_output_0 0=2
+Convolution      /block3/block3.1/conv3/Conv 1 1 /block3/block3.1/se/Mul_output_0 /block3/block3.1/conv3/Conv_output_0 0=48 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=6912
+BinaryOp         /block3/block3.1/Add     2 1 /block3/block3.1/conv3/Conv_output_0 /block3/block3.0/act3/Mul_output_0_splitncnn_0 /block3/block3.1/Add_output_0 0=0
+HardSwish        /block3/block3.1/act3/Mul 1 1 /block3/block3.1/Add_output_0 /block3/block3.1/act3/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_13             1 2 /block3/block3.1/act3/Mul_output_0 /block3/block3.1/act3/Mul_output_0_splitncnn_0 /block3/block3.1/act3/Mul_output_0_splitncnn_1
+Convolution      /block4/block4.0/conv1/Conv 1 1 /block3/block3.1/act3/Mul_output_0_splitncnn_1 /block4/block4.0/conv1/Conv_output_0 0=288 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=13824
+HardSwish        /block4/block4.0/act1/Mul 1 1 /block4/block4.0/conv1/Conv_output_0 /block4/block4.0/act1/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise /block4/block4.0/conv2/Conv 1 1 /block4/block4.0/act1/Mul_output_0 /block4/block4.0/conv2/Conv_output_0 0=288 1=5 11=5 2=4 12=4 3=1 13=1 4=8 14=8 15=8 16=8 5=1 6=7200 7=288
+HardSwish        /block4/block4.0/act2/Mul 1 1 /block4/block4.0/conv2/Conv_output_0 /block4/block4.0/act2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_14             1 2 /block4/block4.0/act2/Mul_output_0 /block4/block4.0/act2/Mul_output_0_splitncnn_0 /block4/block4.0/act2/Mul_output_0_splitncnn_1
+Reduction        /block4/block4.0/se/ReduceMean 1 1 /block4/block4.0/act2/Mul_output_0_splitncnn_1 /block4/block4.0/se/ReduceMean_output_0 0=3 1=0 -23303=2,1,2 4=1 5=1
+Reshape          /block4/block4.0/se/Reshape 1 1 /block4/block4.0/se/ReduceMean_output_0 /block4/block4.0/se/Reshape_output_0 0=288
+InnerProduct     /block4/block4.0/se/fc/fc.0/MatMul 1 1 /block4/block4.0/se/Reshape_output_0 /block4/block4.0/se/fc/fc.0/MatMul_output_0 0=72 1=0 2=20736
+ReLU             /block4/block4.0/se/fc/fc.1/Relu 1 1 /block4/block4.0/se/fc/fc.0/MatMul_output_0 /block4/block4.0/se/fc/fc.1/Relu_output_0
+InnerProduct     /block4/block4.0/se/fc/fc.2/MatMul 1 1 /block4/block4.0/se/fc/fc.1/Relu_output_0 /block4/block4.0/se/fc/fc.2/MatMul_output_0 0=288 1=0 2=20736
+HardSigmoid      /block4/block4.0/se/fc/fc.3/HardSigmoid 1 1 /block4/block4.0/se/fc/fc.2/MatMul_output_0 /block4/block4.0/se/fc/fc.3/HardSigmoid_output_0 0=1.666667e-01 1=5.000000e-01
+Reshape          /block4/block4.0/se/Reshape_1 1 1 /block4/block4.0/se/fc/fc.3/HardSigmoid_output_0 /block4/block4.0/se/Reshape_1_output_0 0=1 1=1 2=288
+BinaryOp         /block4/block4.0/se/Mul  2 1 /block4/block4.0/act2/Mul_output_0_splitncnn_0 /block4/block4.0/se/Reshape_1_output_0 /block4/block4.0/se/Mul_output_0 0=2
+Convolution      /block4/block4.0/conv3/Conv 1 1 /block4/block4.0/se/Mul_output_0 /block4/block4.0/conv3/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=27648
+Convolution      /block4/block4.0/skip/skip.0/Conv 1 1 /block3/block3.1/act3/Mul_output_0_splitncnn_0 /block4/block4.0/skip/skip.0/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4608
+BinaryOp         /block4/block4.0/Add     2 1 /block4/block4.0/conv3/Conv_output_0 /block4/block4.0/skip/skip.0/Conv_output_0 /block4/block4.0/Add_output_0 0=0
+HardSwish        /block4/block4.0/act3/Mul 1 1 /block4/block4.0/Add_output_0 /block4/block4.0/act3/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_15             1 2 /block4/block4.0/act3/Mul_output_0 /block4/block4.0/act3/Mul_output_0_splitncnn_0 /block4/block4.0/act3/Mul_output_0_splitncnn_1
+Convolution      /block4/block4.1/conv1/Conv 1 1 /block4/block4.0/act3/Mul_output_0_splitncnn_1 /block4/block4.1/conv1/Conv_output_0 0=576 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=55296
+HardSwish        /block4/block4.1/act1/Mul 1 1 /block4/block4.1/conv1/Conv_output_0 /block4/block4.1/act1/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise /block4/block4.1/conv2/Conv 1 1 /block4/block4.1/act1/Mul_output_0 /block4/block4.1/conv2/Conv_output_0 0=576 1=5 11=5 2=4 12=4 3=1 13=1 4=8 14=8 15=8 16=8 5=1 6=14400 7=576
+HardSwish        /block4/block4.1/act2/Mul 1 1 /block4/block4.1/conv2/Conv_output_0 /block4/block4.1/act2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_16             1 2 /block4/block4.1/act2/Mul_output_0 /block4/block4.1/act2/Mul_output_0_splitncnn_0 /block4/block4.1/act2/Mul_output_0_splitncnn_1
+Reduction        /block4/block4.1/se/ReduceMean 1 1 /block4/block4.1/act2/Mul_output_0_splitncnn_1 /block4/block4.1/se/ReduceMean_output_0 0=3 1=0 -23303=2,1,2 4=1 5=1
+Reshape          /block4/block4.1/se/Reshape 1 1 /block4/block4.1/se/ReduceMean_output_0 /block4/block4.1/se/Reshape_output_0 0=576
+InnerProduct     /block4/block4.1/se/fc/fc.0/MatMul 1 1 /block4/block4.1/se/Reshape_output_0 /block4/block4.1/se/fc/fc.0/MatMul_output_0 0=144 1=0 2=82944
+ReLU             /block4/block4.1/se/fc/fc.1/Relu 1 1 /block4/block4.1/se/fc/fc.0/MatMul_output_0 /block4/block4.1/se/fc/fc.1/Relu_output_0
+InnerProduct     /block4/block4.1/se/fc/fc.2/MatMul 1 1 /block4/block4.1/se/fc/fc.1/Relu_output_0 /block4/block4.1/se/fc/fc.2/MatMul_output_0 0=576 1=0 2=82944
+HardSigmoid      /block4/block4.1/se/fc/fc.3/HardSigmoid 1 1 /block4/block4.1/se/fc/fc.2/MatMul_output_0 /block4/block4.1/se/fc/fc.3/HardSigmoid_output_0 0=1.666667e-01 1=5.000000e-01
+Reshape          /block4/block4.1/se/Reshape_1 1 1 /block4/block4.1/se/fc/fc.3/HardSigmoid_output_0 /block4/block4.1/se/Reshape_1_output_0 0=1 1=1 2=576
+BinaryOp         /block4/block4.1/se/Mul  2 1 /block4/block4.1/act2/Mul_output_0_splitncnn_0 /block4/block4.1/se/Reshape_1_output_0 /block4/block4.1/se/Mul_output_0 0=2
+Convolution      /block4/block4.1/conv3/Conv 1 1 /block4/block4.1/se/Mul_output_0 /block4/block4.1/conv3/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=55296
+BinaryOp         /block4/block4.1/Add     2 1 /block4/block4.1/conv3/Conv_output_0 /block4/block4.0/act3/Mul_output_0_splitncnn_0 /block4/block4.1/Add_output_0 0=0
+HardSwish        /block4/block4.1/act3/Mul 1 1 /block4/block4.1/Add_output_0 /block4/block4.1/act3/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_17             1 2 /block4/block4.1/act3/Mul_output_0 /block4/block4.1/act3/Mul_output_0_splitncnn_0 /block4/block4.1/act3/Mul_output_0_splitncnn_1
+Convolution      /block4/block4.2/conv1/Conv 1 1 /block4/block4.1/act3/Mul_output_0_splitncnn_1 /block4/block4.2/conv1/Conv_output_0 0=576 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=55296
+HardSwish        /block4/block4.2/act1/Mul 1 1 /block4/block4.2/conv1/Conv_output_0 /block4/block4.2/act1/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise /block4/block4.2/conv2/Conv 1 1 /block4/block4.2/act1/Mul_output_0 /block4/block4.2/conv2/Conv_output_0 0=576 1=5 11=5 2=4 12=4 3=1 13=1 4=8 14=8 15=8 16=8 5=1 6=14400 7=576
+HardSwish        /block4/block4.2/act2/Mul 1 1 /block4/block4.2/conv2/Conv_output_0 /block4/block4.2/act2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_18             1 2 /block4/block4.2/act2/Mul_output_0 /block4/block4.2/act2/Mul_output_0_splitncnn_0 /block4/block4.2/act2/Mul_output_0_splitncnn_1
+Reduction        /block4/block4.2/se/ReduceMean 1 1 /block4/block4.2/act2/Mul_output_0_splitncnn_1 /block4/block4.2/se/ReduceMean_output_0 0=3 1=0 -23303=2,1,2 4=1 5=1
+Reshape          /block4/block4.2/se/Reshape 1 1 /block4/block4.2/se/ReduceMean_output_0 /block4/block4.2/se/Reshape_output_0 0=576
+InnerProduct     /block4/block4.2/se/fc/fc.0/MatMul 1 1 /block4/block4.2/se/Reshape_output_0 /block4/block4.2/se/fc/fc.0/MatMul_output_0 0=144 1=0 2=82944
+ReLU             /block4/block4.2/se/fc/fc.1/Relu 1 1 /block4/block4.2/se/fc/fc.0/MatMul_output_0 /block4/block4.2/se/fc/fc.1/Relu_output_0
+InnerProduct     /block4/block4.2/se/fc/fc.2/MatMul 1 1 /block4/block4.2/se/fc/fc.1/Relu_output_0 /block4/block4.2/se/fc/fc.2/MatMul_output_0 0=576 1=0 2=82944
+HardSigmoid      /block4/block4.2/se/fc/fc.3/HardSigmoid 1 1 /block4/block4.2/se/fc/fc.2/MatMul_output_0 /block4/block4.2/se/fc/fc.3/HardSigmoid_output_0 0=1.666667e-01 1=5.000000e-01
+Reshape          /block4/block4.2/se/Reshape_1 1 1 /block4/block4.2/se/fc/fc.3/HardSigmoid_output_0 /block4/block4.2/se/Reshape_1_output_0 0=1 1=1 2=576
+BinaryOp         /block4/block4.2/se/Mul  2 1 /block4/block4.2/act2/Mul_output_0_splitncnn_0 /block4/block4.2/se/Reshape_1_output_0 /block4/block4.2/se/Mul_output_0 0=2
+Convolution      /block4/block4.2/conv3/Conv 1 1 /block4/block4.2/se/Mul_output_0 /block4/block4.2/conv3/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=55296
+BinaryOp         /block4/block4.2/Add     2 1 /block4/block4.2/conv3/Conv_output_0 /block4/block4.1/act3/Mul_output_0_splitncnn_0 /block4/block4.2/Add_output_0 0=0
+HardSwish        /block4/block4.2/act3/Mul 1 1 /block4/block4.2/Add_output_0 /block4/block4.2/act3/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Convolution      /block5/block5.0/Conv    1 1 /block4/block4.2/act3/Mul_output_0 /block5/block5.0/Conv_output_0 0=576 1=1 11=1 2=4 12=4 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=55296
+HardSwish        /block5/block5.2/Mul     1 1 /block5/block5.0/Conv_output_0 /block5/block5.2/Mul_output_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_19             1 2 /block5/block5.2/Mul_output_0 /block5/block5.2/Mul_output_0_splitncnn_0 /block5/block5.2/Mul_output_0_splitncnn_1
+Convolution      /aspp_conv1/aspp_conv1.0/Conv 1 1 /block5/block5.2/Mul_output_0_splitncnn_1 /aspp_conv1/aspp_conv1.0/Conv_output_0 0=128 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=73728
+ReLU             /aspp_conv1/aspp_conv1.2/Relu 1 1 /aspp_conv1/aspp_conv1.0/Conv_output_0 /aspp_conv1/aspp_conv1.2/Relu_output_0
+Pooling          /aspp_conv2/aspp_conv2.0/AveragePool 1 1 /block5/block5.2/Mul_output_0_splitncnn_0 /aspp_conv2/aspp_conv2.0/AveragePool_output_0 0=1 1=28 11=28 2=10 12=8 3=0 13=0 14=0 15=0 5=1 6=1
+Convolution      /aspp_conv2/aspp_conv2.1/Conv 1 1 /aspp_conv2/aspp_conv2.0/AveragePool_output_0 /aspp_conv2/aspp_conv2.1/Conv_output_0 0=128 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=0 6=73728
+Sigmoid          /aspp_conv2/aspp_conv2.2/Sigmoid 1 1 /aspp_conv2/aspp_conv2.1/Conv_output_0 /aspp_conv2/aspp_conv2.2/Sigmoid_output_0
+Interp           /Resize                  1 1 /aspp_conv2/aspp_conv2.2/Sigmoid_output_0 /Resize_output_0 0=2 1=1.000000e+00 2=1.000000e+00 3=40 4=40 6=1
+BinaryOp         /Mul                     2 1 /aspp_conv1/aspp_conv1.2/Relu_output_0 /Resize_output_0 /Mul_output_0 0=2
+Convolution      /conv_up1/Conv           1 1 /Mul_output_0 /conv_up1/Conv_output_0 0=128 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=16384
+Interp           /Resize_1                1 1 /conv_up1/Conv_output_0 /Resize_1_output_0 0=2 1=1.000000e+00 2=1.000000e+00 3=80 4=80 6=0
+Convolution      /convs4/Conv             1 1 /block0/block0.0/conv/conv.1/relu/Relu_output_0_splitncnn_0 /convs4/Conv_output_0 0=64 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=0 6=1024
+Concat           /Concat_2                2 1 /Resize_1_output_0 /convs4/Conv_output_0 /Concat_2_output_0 0=0
+Convolution      /conv_up2/conv/Conv      1 1 /Concat_2_output_0 /conv_up2/conv/Conv_output_0 0=128 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=24576
+ReLU             /conv_up2/relu/Relu      1 1 /conv_up2/conv/Conv_output_0 /conv_up2/relu/Relu_output_0
+Interp           /Resize_2                1 1 /conv_up2/relu/Relu_output_0 /Resize_2_output_0 0=2 1=1.000000e+00 2=1.000000e+00 3=160 4=160 6=0
+Convolution      /convs2/Conv             1 1 /early/early.2/Mul_output_0_splitncnn_0 /convs2/Conv_output_0 0=32 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=0 6=512
+Concat           /Concat_4                2 1 /Resize_2_output_0 /convs2/Conv_output_0 /Concat_4_output_0 0=0
+Convolution      /conv_up3/conv/Conv      1 1 /Concat_4_output_0 /conv_up3/conv/Conv_output_0 0=128 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=20480
+ReLU             /conv_up3/relu/Relu      1 1 /conv_up3/conv/Conv_output_0 /conv_up3/relu/Relu_output_0
+Convolution      /last/Conv               1 1 /conv_up3/relu/Relu_output_0 /last/Conv_output_0 0=3 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=384
+Interp           /Resize_3                1 1 /last/Conv_output_0 output 0=2 1=1.000000e+00 2=1.000000e+00 3=320 4=320 6=0
